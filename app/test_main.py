@@ -13,7 +13,12 @@ from app.main import get_human_age
         (24, 24, [2, 2]),
         (27, 27, [2, 2]),
         (28, 28, [3, 2]),
-        (100, 100, [21, 17])
+        (29, 29, [3, 3]),
+        (30, 30, [3, 3]),
+        (100, 100, [21, 17]),
+        (5, -1, [0, 0]),
+        (-1, 5, [0, 0]),
+        (1000, 2000, [246, 397]),
     ]
 )
 def test_get_human_age(cat_age: int, dog_age: int, expected: list) -> None:
@@ -21,36 +26,13 @@ def test_get_human_age(cat_age: int, dog_age: int, expected: list) -> None:
 
 
 @pytest.mark.parametrize(
-    "cat_age,dog_age,expected",
+    "cat_age,dog_age,",
     [
-        (13, 13, [0, 0]),
-        (22, 22, [1, 1]),
-        (26, 26, [2, 2]),
-    ],
+        ("34", 6),
+        (None, 1.4),
+        ([14], 3),
+    ]
 )
-def test_before_transition(cat_age: int, dog_age: int, expected: int) -> None:
-    assert get_human_age(cat_age, dog_age) == expected
-
-
-@pytest.mark.parametrize(
-    "cat_age,dog_age,expected",
-    [
-        (-5, -3, [0, 0]),
-        (0, 0, [0, 0]),
-    ],
-)
-def test_out_of_range(cat_age: int, dog_age: int, expected: int) -> None:
-    assert get_human_age(cat_age, dog_age) == expected
-
-
-@pytest.mark.parametrize(
-    "cat_age,dog_age",
-    [
-        ("10", 10),
-        (10, None),
-        ([], 5),
-    ],
-)
-def test_invalid_types(cat_age: int, dog_age: int) -> None:
+def test_get_dog_cat_age(cat_age: int, dog_age: int) -> None:
     with pytest.raises(TypeError):
         get_human_age(cat_age, dog_age)
